@@ -5,5 +5,6 @@ import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 @Module({
   imports: [InfrastructureModule],
   providers: [UserService],
+  exports: [UserService],
 })
 export class DomainModule {}

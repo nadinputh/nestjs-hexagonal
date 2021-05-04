@@ -15,9 +15,9 @@ import { InfrastructureModule } from './infrastructure/infrastructure.module';
       limit: 60,
     }),
     EventEmitterModule.forRoot(),
-    InfrastructureModule,
-    DomainModule,
     ApplicationModule,
+    DomainModule,
+    InfrastructureModule,
   ],
   controllers: [],
   providers: [

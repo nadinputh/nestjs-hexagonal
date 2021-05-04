@@ -1,24 +1,10 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import databaseConfig from './_config/database.config';
-import { UserRepository } from './io/repository/user.repository';
-import { User } from './io/entity/user.entity';
+import { DatabaseModule } from './database.module';
+import { UsersRepository } from './io/repository/user.repository';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      load: [databaseConfig],
-    }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (config: ConfigService) => config.get('database'),
-      inject: [ConfigService],
-    }),
-    TypeOrmModule.forFeature([User]),
-  ],
-  providers: [UserRepository],
-  exports: [TypeOrmModule, UserRepository],
+  imports: [DatabaseModule],
+  providers: [UsersRepository],
+  exports: [UsersRepository],
 })
 export class InfrastructureModule {}
