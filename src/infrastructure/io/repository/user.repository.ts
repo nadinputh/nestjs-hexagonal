@@ -16,8 +16,6 @@ export class UsersRepository {
     user.firstName = dto.firstName;
     user.lastName = dto.lastName;
 
-    console.log(user);
-
     return this.usersRepository.save(user);
   }
 }
