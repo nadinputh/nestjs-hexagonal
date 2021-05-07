@@ -7,6 +7,8 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { UserController } from './controller/user.controller';
 import { HomeListener } from './listener/home.listener';
 import { DomainModule } from '../domain/domain.module';
+import { RolesGuard } from './guard/roles.guard';
+import { PermissionGuard } from './guard/permissions.guard';
 
 @Module({
   imports: [
@@ -22,6 +24,14 @@ import { DomainModule } from '../domain/domain.module';
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: PermissionGuard,
     },
     {
       provide: APP_INTERCEPTOR,
