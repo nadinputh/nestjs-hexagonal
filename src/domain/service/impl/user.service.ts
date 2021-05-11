@@ -7,8 +7,8 @@ import {
   USERS_REPOSITORY,
 } from '@adapters/repository/user.repository';
 import { CreateUserCommand } from '@dtos/command/create-user.command';
-import { UserCreatedResponse } from '@dtos/response/user-created.response';
 import { UsersPaging } from '@dtos/response/users.response';
+import { UserResponse } from '@dtos/response/user.response';
 
 @Injectable()
 export class UserService implements IUserService {
@@ -22,7 +22,7 @@ export class UserService implements IUserService {
     return this.userRepository.getAll({ size, page });
   }
 
-  create(dto: CreateUserCommand): Promise<UserCreatedResponse> {
+  create(dto: CreateUserCommand): Promise<UserResponse> {
     return this.userRepository.create({
       firstName: dto.firstName,
       lastName: dto.lastName,

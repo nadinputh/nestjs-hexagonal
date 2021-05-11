@@ -4,8 +4,8 @@ import { CreateUserCommand } from '@dtos/command/create-user.command';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { IUserRepository } from '@adapters/repository/user.repository';
-import { UserCreatedResponse } from '@dtos/response/user-created.response';
 import { UsersPaging } from '@dtos/result/users.result';
+import { UserResponse } from '@dtos/response/user.response';
 
 @Injectable()
 export class UsersRepository implements IUserRepository {
@@ -42,7 +42,7 @@ export class UsersRepository implements IUserRepository {
     };
   }
 
-  create(dto: CreateUserCommand): Promise<UserCreatedResponse> {
+  create(dto: CreateUserCommand): Promise<UserResponse> {
     const user = new User();
     user.firstName = dto.firstName;
     user.lastName = dto.lastName;

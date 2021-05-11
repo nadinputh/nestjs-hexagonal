@@ -1,6 +1,56 @@
 # Development Rules
 
-## 1. Use JSON
+## 1. Project Architectured (Hexagonal Architecture)
+
+- **Use the architecture when**
+  - You want clearly divide software responsibilities into different parts of the program.
+  - You want to **decoupled** your code.
+  - You want to prevent a change from **propagating** throughout the application.
+  - You want to make your application more **maintainable** and **testable**.
+
+  ![](./loosely_couple.png)
+
+- **Hexagonal (Ports and Adapters) Architecture**
+  - Inside the Hexagon with all the **business models/logics**, outside the Hexagon: the infrastructure
+  - The **dependencies** always go from outside toward the inside of the Hexagon, which ensures the isolation of the **business domain**
+  - **Hexagon** depends on nothing but **itself**,It must not depend on any technical frameworks
+
+  ![](./architecture.png)
+
+- **Folder Structure**
+  ```
+  src
+    |-- app.module.ts                 // Register Application Module
+    |-- application                   // Primary/Driving Adapter
+    |   |-- application.module.ts     // Register Controller, Interceptor, ...
+    |   |-- controller
+    |   |-- decorator
+    |   |-- interceptor
+    |   |-- event
+    |   |-- guard
+    |   |-- listener
+    |   |-- request
+    |-- constant
+    |-- domain                        // Business Logic Implementation
+    |   |-- domain.module.ts
+    |   |-- adapter                   // Adapter or Contract between domain and infrastructure (interface)
+    |   |   |-- repository
+    |   |-- service                   // Services or Business Login (interface)
+    |   |   |-- impl                  // Services implement
+    |-- dto                           // Data Transfer Object
+    |   |-- command                   // Command from application to domain
+    |   |-- query                     // Query or request from domain to infrastructure
+    |   |-- response                  // Response return from domain to application
+    |   |-- result                    // Result return from infrastructure to domain
+    |-- infrastructure                // Secondary/Driven Adapter
+    |   |-- database.module.ts        // Config Database Module
+    |   |-- infrastructure.module.ts  // Register providers
+    |   |-- _config                   // Configuration modules
+    |   |-- io                        // I/O databases
+    |   |   |-- entity                // Entity model (User, ...)
+    |   |   |-- repository            // Model Repository
+    |-- main.ts
+  ```
 
 ## 2. Use Nouns instead of Verbs
 

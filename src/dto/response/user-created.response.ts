@@ -1,5 +1,5 @@
+import { UserResponse } from './user.response';
+
 export interface UserCreatedResponse {
-  uuid: string;
-  firstName: string;
-  lastName: string;
+  user: UserResponse | any;
 }
