@@ -4,7 +4,7 @@
 
 ## 2. Use Nouns instead of Verbs
 
-    In API development REST approach can be called a resource based. So in your application, you work with resources and their collections (eg. a single book, and a list of all books). The actions on the resources are strictly defined by the HTTP methods such as GET, PUT, POST, PATCH, DELETE
+  In API development REST approach can be called a resource based. So in your application, you work with resources and their collections (eg. a single book, and a list of all books). The actions on the resources are strictly defined by the HTTP methods such as GET, PUT, POST, PATCH, DELETE
 
 ### Example:
 
@@ -16,7 +16,7 @@
 
 ## 3. Name the collections using Plural Nouns
 
-    For the collections in REST API development use plural nouns.
+  For the collections in REST API development use plural nouns.
 
 ### Example:
 
@@ -26,9 +26,9 @@
 
 ## 4. Use resource nesting to show relations or hierarchy
 
-    Resource objects often have some kind of functional hierarchy or are related to each other.
+  Resource objects often have some kind of functional hierarchy or are related to each other.
 
-### Example:
+  ### Example:
 
 - `/users` <- user’s list
 - `/users/123` <- specific user
@@ -37,37 +37,37 @@
 
 ## 5. Filtering, sorting, paging, and field selection
 
-    Sorting - basically allows sorting the results ascending or descending by a chosen parameter or parameters, eg. by date
-    Paging - uses “limit” in order to narrow down the number of results shown to a specific number, and “offset” to specify which part of the results range to be shown - this is important in cases where the number of total results is greater than the one presented, this works like pagination you may encounter on many websites
+  Sorting - basically allows sorting the results ascending or descending by a chosen parameter or parameters, eg. by date
+  Paging - uses “limit” in order to narrow down the number of results shown to a specific number, and “offset” to specify which part of the results range to be shown - this is important in cases where the number of total results is greater than the one presented, this works like pagination you may encounter on many websites
 
-### Filtering:
+  ### Filtering:
 
-- `GET /users?country=USA`
-- `GET /users?creation_date=2019-11-11`
-- `GET /users?creation_date=2019-11-11`
+  - `GET /users?country=USA`
+  - `GET /users?creation_date=2019-11-11`
+  - `GET /users?creation_date=2019-11-11`
 
-### Sorting:
+  ### Sorting:
 
-- `GET /users?sort=birthdate_date:asc`
-- `GET /users?sort=birthdate_date:desc`
+  - `GET /users?sort=birthdate_date:asc`
+  - `GET /users?sort=birthdate_date:desc`
 
-### Paging:
+  ### Paging:
 
-- `GET /users?limit=100`
-- `GET /users?offset=2`
+  - `GET /users?limit=100`
+  - `GET /users?offset=2`
 
-### All together:
+  ### All together:
 
-- `GET /users?country=USA&creation_date=2019-11-11&sort=birthdate_date:desc&limit=100&offset=2`
+  - `GET /users?country=USA&creation_date=2019-11-11&sort=birthdate_date:desc&limit=100&offset=2`
 
-### Fields Selection
+  ### Fields Selection
 
-- `GET /users/123?fields=username,email` (for one specific user)
-- `GET /users?fields=username,email` (for a full list of users)
+  - `GET /users/123?fields=username,email` (for one specific user)
+  - `GET /users?fields=username,email` (for a full list of users)
 
 ## 6. Versioning
 
-    Versioning your REST API is a good approach to take right from the start. This will allow you to introduce changes to the data structure or specific actions, even if they are breaking/non-backward compatible changes. We are using major version indication only. Example: `https://api.stripe.com/v1/`
+Versioning your REST API is a good approach to take right from the start. This will allow you to introduce changes to the data structure or specific actions, even if they are breaking/non-backward compatible changes. We are using major version indication only. Example: `https://api.stripe.com/v1/`
 
 ## 7. Status Codes
 
@@ -88,6 +88,25 @@
 ## 8. Request, Header and Response
 
 - Request
+
+  - Query
+    - Paging (size=number, page=number)
+    - Querying (key=value, keys=value1,value2)
+  - Path Variable
+    - {id}, {key}, {name} ...
+  - Body
+    - Json Object
+      ```json
+      {
+        "number": 123,
+        "string": "string",
+        "boolean": true,
+        "object": {},
+        "listOfString": ["string"],
+        "listOfObject": [{}]
+      }
+      ```
+    - Form Data (multipath, files)
 
 - Header
 
@@ -131,9 +150,8 @@
 
     ```json
     {
-      "status": 201,
-      "code": "CREATED",
-      "message": "User Created",
+      "status": 200,
+      "code": "OK",
       "users|books": {
         "users|books": [
           {
@@ -172,4 +190,4 @@
 
 ## 9. API Documentation
 
-    It is extremely important to have API documentation published. Not only developers like to know what they are dealing with when making an integration, but this also allows potential users to see what is made available via your API.
+  It is extremely important to have API documentation published. Not only developers like to know what they are dealing with when making an integration, but this also allows potential users to see what is made available via your API.

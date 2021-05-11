@@ -1,26 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { EventEmitter2 } from 'eventemitter2';
-import { HOME } from 'src/constant/event-name.constant';
-import { HomeEvent } from '../../application/event/home.event';
-import { UsersRepository } from '../../infrastructure/io/repository/user.repository';
+import { CreateUserCommand } from '@dtos/command/create-user.command';
+import { UserCreatedResponse } from '@dtos/response/user-created.response';
+import { UsersPaging } from '@dtos/response/users.response';
 
-@Injectable()
-export class UserService {
-  constructor(
-    private userRepository: UsersRepository,
-    private readonly eventEmitter: EventEmitter2,
-  ) {}
+export const USER_SERVICE = 'USER_SERVICE';
 
-  getHello(): string {
-    const event = new HomeEvent();
-    event.greeting = 'Hello World!';
-    this.eventEmitter.emit(HOME, event);
-
-    this.userRepository.create({
-      firstName: 'Nadin',
-      lastName: 'POUTH',
-    });
-
-    return event.greeting;
-  }
+export interface IUserService {
+  getHello(): string;
+  getAll({ size, page }): Promise<UsersPaging>;
+  create(dto: CreateUserCommand): Promise<UserCreatedResponse>;
 }

@@ -10,6 +10,15 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "paths": {
+      "@services/*": ["src/domain/service/*"],
+      "@dtos/*": ["src/dto/*"],
+      "@application/*": ["src/application/*"],
+      "@infrastructure/*": ["src/infrastructure/*"],
+      "@domain/*": ["src/domain/*"],
+      "@adapters/*": ["src/domain/adapter/*"],
+      "@entities/*": ["src/infrastructure/io/entity/*"],
+    },
     "incremental": true
   }
 }
