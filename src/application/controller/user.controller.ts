@@ -13,8 +13,8 @@ export class UserController {
   ) {}
 
   @Get()
-  async getHello(@Query() query: PaginateRequest): Promise<UsersPaging> {
-    return await this.userService.getAll(query);
+  async index(@Query() query: PaginateRequest): Promise<UsersPaging> {
+    return this.userService.getAll(query);
   }
 
   @Post()

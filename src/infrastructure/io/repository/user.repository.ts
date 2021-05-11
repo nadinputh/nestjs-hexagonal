@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { IUserRepository } from '@adapters/repository/user.repository';
 import { UsersPaging } from '@dtos/result/users.result';
 import { UserResponse } from '@dtos/response/user.response';
+import { UsersCommand } from '@dtos/command/users.command';
 
 @Injectable()
 export class UsersRepository implements IUserRepository {
@@ -14,7 +15,7 @@ export class UsersRepository implements IUserRepository {
     private usersRepository: Repository<User>,
   ) {}
 
-  async getAll({ size, page }): Promise<UsersPaging> {
+  async getAll({ size = 10, page = 1 }: UsersCommand): Promise<UsersPaging> {
     const [users, total] = await this.usersRepository
       .findAndCount({
         order: {
@@ -35,8 +36,8 @@ export class UsersRepository implements IUserRepository {
     return {
       users: {
         users,
-        page,
-        size,
+        page: page * 1,
+        size: size * 1,
         total,
       },
     };

@@ -9,6 +9,8 @@ import {
 import { CreateUserCommand } from '@dtos/command/create-user.command';
 import { UsersPaging } from '@dtos/response/users.response';
 import { UserResponse } from '@dtos/response/user.response';
+import { UsersCommand } from '@dtos/command/users.command';
+import { USER_CREATED } from '@application/event/user-created.event';
 
 @Injectable()
 export class UserService implements IUserService {
@@ -18,22 +20,16 @@ export class UserService implements IUserService {
     private readonly eventEmitter: EventEmitter2,
   ) {}
 
-  getAll({ size, page }): Promise<UsersPaging> {
+  getAll({ size, page }: UsersCommand): Promise<UsersPaging> {
     return this.userRepository.getAll({ size, page });
   }
 
-  create(dto: CreateUserCommand): Promise<UserResponse> {
-    return this.userRepository.create({
+  async create(dto: CreateUserCommand): Promise<UserResponse> {
+    const user = await this.userRepository.create({
       firstName: dto.firstName,
       lastName: dto.lastName,
     });
-  }
-
-  getHello(): string {
-    const event = new HomeEvent();
-    event.greeting = 'Hello World!';
-    this.eventEmitter.emit(HOME, event);
-
-    return event.greeting;
+    this.eventEmitter.emit(USER_CREATED, user);
+    return user;
   }
 }

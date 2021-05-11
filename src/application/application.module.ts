@@ -9,6 +9,7 @@ import { HomeListener } from './listener/home.listener';
 import { DomainModule } from '@domain/domain.module';
 import { RolesGuard } from './guard/roles.guard';
 import { PermissionGuard } from './guard/permissions.guard';
+import { UserListener } from './listener/user.listener';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { PermissionGuard } from './guard/permissions.guard';
       useClass: LoggingInterceptor,
     },
     HomeListener,
+    UserListener,
   ],
 })
 export class ApplicationModule {}
