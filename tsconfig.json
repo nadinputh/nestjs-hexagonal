@@ -17,7 +17,7 @@
       "@infrastructure/*": ["src/infrastructure/*"],
       "@domain/*": ["src/domain/*"],
       "@adapters/*": ["src/domain/adapter/*"],
-      "@entities/*": ["src/infrastructure/io/entity/*"],
+      "@entities/*": ["src/infrastructure/io/entity/*"]
     },
     "incremental": true
   }

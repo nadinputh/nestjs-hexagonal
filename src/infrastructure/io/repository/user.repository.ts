@@ -29,6 +29,8 @@ export class UsersRepository implements IUserRepository {
           uuid: user.uuid,
           firstName: user.firstName,
           lastName: user.lastName,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
         })),
         total,
       ]);
@@ -52,6 +54,8 @@ export class UsersRepository implements IUserRepository {
       uuid: user.uuid,
       firstName: user.firstName,
       lastName: user.lastName,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
     }));
   }
 }

@@ -1,11 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, Generated } from 'typeorm';
+import { Entity, Column, Generated, Index } from 'typeorm';
+import { BaseEntity } from './base.entity';
 
 @Entity('users')
-export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class User extends BaseEntity {
   @Column()
+  @Index({ unique: true })
   @Generated('uuid')
   uuid: string;
 

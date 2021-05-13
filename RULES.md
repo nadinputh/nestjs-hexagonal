@@ -2,22 +2,22 @@
 
 ## 1. Project Architectured (Hexagonal Architecture)
 
-- **Use the architecture when**
+### 1.1. Use the architecture when
   - You want clearly divide software responsibilities into different parts of the program.
   - You want to **decoupled** your code.
   - You want to prevent a change from **propagating** throughout the application.
   - You want to make your application more **maintainable** and **testable**.
 
-  ![](./loosely_couple.png)
+    <img src="./docs/loosely_couple.png" alt="" data-canonical-src="./docs/loosely_couple.png" width="600" />
 
-- **Hexagonal (Ports and Adapters) Architecture**
+### 1.2. Hexagonal (Ports and Adapters) Architecture 
   - Inside the Hexagon with all the **business models/logics**, outside the Hexagon: the infrastructure
   - The **dependencies** always go from outside toward the inside of the Hexagon, which ensures the isolation of the **business domain**
   - **Hexagon** depends on nothing but **itself**,It must not depend on any technical frameworks
 
-  ![](./architecture.png)
+    <img src="./docs/architecture.png" alt="" data-canonical-src="./docs/architecture.png" width="600" />
 
-- **Folder Structure**
+### 1.3. Folder Structure
   ```
   src
     |-- app.module.ts                 // Register Application Module
@@ -56,61 +56,61 @@
 
   In API development REST approach can be called a resource based. So in your application, you work with resources and their collections (eg. a single book, and a list of all books). The actions on the resources are strictly defined by the HTTP methods such as GET, PUT, POST, PATCH, DELETE
 
-### Example:
+- **Example:**
 
-- `GET /books/123`
-- `DELETE /books/123`
-- `POST /books`
-- `PUT /books/123`
-- `PATCH /books/123`
+  - `GET /books/123`
+  - `DELETE /books/123`
+  - `POST /books`
+  - `PUT /books/123`
+  - `PATCH /books/123`
 
 ## 3. Name the collections using Plural Nouns
 
   For the collections in REST API development use plural nouns.
 
-### Example:
+- **Example:**
 
-- `GET /cars/123`
-- `POST /cars`
-- `GET /cars`
+  - `GET /cars/123`
+  - `POST /cars`
+  - `GET /cars`
 
 ## 4. Use resource nesting to show relations or hierarchy
 
   Resource objects often have some kind of functional hierarchy or are related to each other.
 
-  ### Example:
+- **Example:**
 
-- `/users` <- user’s list
-- `/users/123` <- specific user
-- `/users/123/orders` <- orders list that belongs to a specific user
-- `/users/123/orders/0001` <- specific order of a specific user
+  - `/users` <- user’s list
+  - `/users/123` <- specific user
+  - `/users/123/orders` <- orders list that belongs to a specific user
+  - `/users/123/orders/0001` <- specific order of a specific user
 
 ## 5. Filtering, sorting, paging, and field selection
 
   Sorting - basically allows sorting the results ascending or descending by a chosen parameter or parameters, eg. by date
   Paging - uses “limit” in order to narrow down the number of results shown to a specific number, and “offset” to specify which part of the results range to be shown - this is important in cases where the number of total results is greater than the one presented, this works like pagination you may encounter on many websites
 
-  ### Filtering:
+- **Filtering:**
 
   - `GET /users?country=USA`
   - `GET /users?creation_date=2019-11-11`
   - `GET /users?creation_date=2019-11-11`
 
-  ### Sorting:
+- **Sorting:**
 
   - `GET /users?sort=birthdate_date:asc`
   - `GET /users?sort=birthdate_date:desc`
 
-  ### Paging:
+- **Paging:**
 
   - `GET /users?limit=100`
   - `GET /users?offset=2`
 
-  ### All together:
+- **All together:**
 
   - `GET /users?country=USA&creation_date=2019-11-11&sort=birthdate_date:desc&limit=100&offset=2`
 
-  ### Fields Selection
+- **Fields Selection:**
 
   - `GET /users/123?fields=username,email` (for one specific user)
   - `GET /users?fields=username,email` (for a full list of users)
@@ -137,7 +137,7 @@ Versioning your REST API is a good approach to take right from the start. This w
 
 ## 8. Request, Header and Response
 
-- Request
+### 8.1. Request
 
   - Query
     - Paging (size=number, page=number)
@@ -158,7 +158,7 @@ Versioning your REST API is a good approach to take right from the start. This w
       ```
     - Form Data (multipath, files)
 
-- Header
+### 8.2. Header
 
   - Request:
 
@@ -183,7 +183,7 @@ Versioning your REST API is a good approach to take right from the start. This w
     | X-RateLimit-Reset           | YES       | Remain time in seconde with reset the rate number | Number           |
     | Access-Control-Allow-Origin | YES       | Request Origins Allowed                           | \*               |
 
-- Response
+### 8.3. Response
 
   - Success
 
