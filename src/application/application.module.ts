@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggingInterceptor } from './interceptor/logging.interceptor';
 import { RequestIdInterceptor } from './interceptor/request-id.interceptor';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
@@ -10,6 +10,7 @@ import { DomainModule } from '@domain/domain.module';
 import { RolesGuard } from './guard/roles.guard';
 import { PermissionGuard } from './guard/permissions.guard';
 import { UserListener } from './listener/user.listener';
+import { HttpExceptionFilter } from './exception/filter/http.filter';
 
 @Module({
   imports: [
@@ -41,6 +42,10 @@ import { UserListener } from './listener/user.listener';
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
     },
     HomeListener,
     UserListener,

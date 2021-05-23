@@ -11,14 +11,36 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "@services/*": ["src/domain/service/*"],
-      "@dtos/*": ["src/dto/*"],
-      "@application/*": ["src/application/*"],
-      "@infrastructure/*": ["src/infrastructure/*"],
-      "@domain/*": ["src/domain/*"],
-      "@adapters/*": ["src/domain/adapter/*"],
-      "@entities/*": ["src/infrastructure/io/entity/*"],
-      "@utility/*": ["src/utility/*"]
+      "@requests/*": [
+        "src/application/request/*"
+      ],
+      "@services/*": [
+        "src/domain/service/*"
+      ],
+      "@dtos/*": [
+        "src/dto/*"
+      ],
+      "@application/*": [
+        "src/application/*"
+      ],
+      "@infrastructure/*": [
+        "src/infrastructure/*"
+      ],
+      "@domain/*": [
+        "src/domain/*"
+      ],
+      "@adapters/*": [
+        "src/domain/adapter/*"
+      ],
+      "@entities/*": [
+        "src/infrastructure/io/entity/*"
+      ],
+      "@utility/*": [
+        "src/utility/*"
+      ],
+      "@auth/*": [
+        "src/auth-module/*"
+      ]
     },
     "incremental": true
   }
