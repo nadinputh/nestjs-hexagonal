@@ -1,0 +1,7 @@
+{
+  "bad_request": "Bad Request",
+  "not_found": "Not Found",
+  "positions": {
+    "using": "This Position has been using. You are not able to delete."
+  }
+}

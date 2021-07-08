@@ -1,3 +1,4 @@
+import * as path from 'path';
 import { Module } from '@nestjs/common';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggingInterceptor } from './interceptor/logging.interceptor';
@@ -11,12 +12,26 @@ import { RolesGuard } from './guard/roles.guard';
 import { PermissionGuard } from './guard/permissions.guard';
 import { UserListener } from './listener/user.listener';
 import { HttpExceptionFilter } from './exception/filter/http.filter';
+import {
+  AcceptLanguageResolver,
+  I18nJsonParser,
+  I18nModule,
+} from 'nestjs-i18n';
+import { BadRequestExceptionFilter } from './exception/filter/bad-request.filter';
 
 @Module({
   imports: [
     ThrottlerModule.forRoot({
       ttl: 60,
       limit: 60,
+    }),
+    I18nModule.forRoot({
+      fallbackLanguage: process.env.FALLBACK_LOCALE || 'en',
+      parser: I18nJsonParser,
+      parserOptions: {
+        path: path.join(__dirname, '../i18n/'),
+      },
+      resolvers: [AcceptLanguageResolver],
     }),
     EventEmitterModule.forRoot(),
     DomainModule,
@@ -46,6 +61,10 @@ import { HttpExceptionFilter } from './exception/filter/http.filter';
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: BadRequestExceptionFilter,
     },
     HomeListener,
     UserListener,

@@ -34,6 +34,7 @@
     "compression": "^1.7.4",
     "helmet": "^4.5.0",
     "mysql2": "^2.2.5",
+    "nestjs-i18n": "^8.1.2",
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

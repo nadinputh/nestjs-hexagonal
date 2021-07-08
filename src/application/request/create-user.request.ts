@@ -1,11 +1,11 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateUserRequest {
-  @IsString()
-  @IsNotEmpty()
+  @IsString({ message: 'validations.string' })
+  @IsNotEmpty({ message: 'validations.not_empty' })
   firstName: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @IsString({ message: 'validations.string' })
+  @IsNotEmpty({ message: 'validations.not_empty' })
   lastName: string;
 }

@@ -10,6 +10,8 @@ export default registerAs('database', () => ({
   password: process.env.DB_PASSWORD || '',
   // autoLoadEntities: true,
   // entities: ['**/*.entity{.ts,.js}'],
-  entities: [User],
-  synchronize: process.env.NODE_ENV != 'production',
+  entities,
+  // synchronize: process.env.NODE_ENV != 'production',
 }));
+
+export const entities = [User];

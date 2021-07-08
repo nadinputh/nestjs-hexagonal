@@ -1,21 +1,8 @@
 import { Module } from '@nestjs/common';
-import { USERS_REPOSITORY } from '@adapters/repository/user.repository';
-import { DatabaseModule } from '@infrastructure/database.module';
-import { UsersRepository } from '@infrastructure/io/repository/user.repository';
+import { IOModule } from '@infrastructure/io/io.module';
 
 @Module({
-  imports: [DatabaseModule],
-  providers: [
-    {
-      provide: USERS_REPOSITORY,
-      useClass: UsersRepository,
-    },
-  ],
-  exports: [
-    {
-      provide: USERS_REPOSITORY,
-      useClass: UsersRepository,
-    },
-  ],
+  imports: [IOModule],
+  exports: [IOModule],
 })
 export class InfrastructureModule {}
