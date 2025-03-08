@@ -1,4 +1,3 @@
-import * as path from 'path';
 import { Module } from '@nestjs/common';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggingInterceptor } from './interceptor/logging.interceptor';
@@ -12,26 +11,32 @@ import { RolesGuard } from './guard/roles.guard';
 import { PermissionGuard } from './guard/permissions.guard';
 import { UserListener } from './listener/user.listener';
 import { HttpExceptionFilter } from './exception/filter/http.filter';
-import {
-  AcceptLanguageResolver,
-  I18nJsonParser,
-  I18nModule,
-} from 'nestjs-i18n';
+import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
 import { BadRequestExceptionFilter } from './exception/filter/bad-request.filter';
+import { ConfigService } from '@nestjs/config';
+import { join, resolve } from 'path';
 
 @Module({
   imports: [
-    ThrottlerModule.forRoot({
-      ttl: 60,
-      limit: 60,
-    }),
-    I18nModule.forRoot({
-      fallbackLanguage: process.env.FALLBACK_LOCALE || 'en',
-      parser: I18nJsonParser,
-      parserOptions: {
-        path: path.join(__dirname, '../i18n/'),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60,
+        limit: 60,
       },
-      resolvers: [AcceptLanguageResolver],
+    ]),
+    I18nModule.forRootAsync({
+      useFactory: (configService: ConfigService) => ({
+        fallbackLanguage: configService.get('FALLBACK_LANGUAGE', 'en'),
+        loaderOptions: {
+          path: resolve('src/i18n/'),
+          watch: true,
+        },
+      }),
+      resolvers: [
+        { use: QueryResolver, options: ['lang'] },
+        AcceptLanguageResolver,
+      ],
+      inject: [ConfigService],
     }),
     EventEmitterModule.forRoot(),
     DomainModule,

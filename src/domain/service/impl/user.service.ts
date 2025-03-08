@@ -1,7 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { EventEmitter2 } from 'eventemitter2';
 import { IUserService } from '@services/user.service';
-import { HOME, HomeEvent } from '@application/event/home.event';
 import {
   IUserRepository,
   USERS_REPOSITORY,
